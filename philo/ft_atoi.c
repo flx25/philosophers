@@ -6,11 +6,19 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 08:12:00 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/13 11:20:09 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:05:39 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
 
 static int	skip(const char *nptr, int *isneg, int i)
 {
