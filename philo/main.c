@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/15 11:26:17 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:29:11 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	*philo(void *arg)
 	d = (t_data *) arg;
 	while (d->timeseaten < d->numberofndeats)
 	{
-		if (pthread_mutex_lock(&d->forks[d->philonum] == 0)
-			&& pthread_mutex_lock(&d->forks[(d->philonum + 1) % d->nump] == 0))
+		if (pthread_mutex_lock(&d->forks[d->philonum]) == 0
+			&& pthread_mutex_lock(&d->forks[(d->philonum + 1) % d->nump]) == 0)
 			printf("Philo number: %i accesses both forks\n", d->philonum);
 	}
 	return (NULL);
