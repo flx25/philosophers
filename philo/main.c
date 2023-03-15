@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/14 13:33:12 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:26:17 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ void	ptjoinall(t_data **d)
 void	*philo(void *arg)
 {
 	t_data	*d;
-	int		philnum;
 
 	d = (t_data *) arg;
-	philnum = d->philonum;
-	printf("Philo number: %i\n", philnum);
-
+	while (d->timeseaten < d->numberofndeats)
+	{
+		if (pthread_mutex_lock(&d->forks[d->philonum] == 0)
+			&& pthread_mutex_lock(&d->forks[(d->philonum + 1) % d->nump] == 0))
+			printf("Philo number: %i accesses both forks\n", d->philonum);
+	}
 	return (NULL);
 }
 
@@ -55,8 +57,9 @@ int	filld(int argc, char **argv, t_data **d)
 		d[i]->ttoeat = ft_atoi(argv[3]);
 		d[i]->ttosleep = ft_atoi(argv[4]);
 		d[i]->philonum = i + 1;
+		d[i]->timeseaten = 0;
 		if (argc == 6)
-			d[i]->numberofeats = ft_atoi(argv[5]);
+			d[i]->numberofndeats = ft_atoi(argv[5]);
 		i++;
 	}
 	return (0);
@@ -90,7 +93,10 @@ int	main(int argc, char **argv)
 	}
 	if (filld(argc, argv, d) == 1)
 		return (0);
+	initforks(d);
 	createthreads(d);
 	ptjoinall(d);
+	//destroy all mutexes
 	free(d); //free every node seperate
+	//free all forks free(d[0]->forks) and destroy all mutexes
 }
