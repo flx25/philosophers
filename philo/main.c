@@ -6,12 +6,12 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/16 11:39:16 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:34:17 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-//need to fix die timer
+
 void	ptjoinall(t_data **d)
 {
 	int	i;
@@ -31,12 +31,11 @@ void	*philo(void *arg)
 	d = (t_data *) arg;
 	gettimeofday(&d->time, NULL);
 	d->lasteat = millsect(d);
-	printf("%i\n", d->nump);
 	while (d->timeseaten < d->numberofndeats || d->numberofndeats == 0)
 	{
 		if (grabforks(d) == 0)
 			eatandsleep(d);
-		if (d->lasteat + d->ttodie >= millsect(d))
+		if (d->lasteat + d->ttodie <= (long) millsect(d))
 		{
 			printf("%ld %i died\n", (long)millsect(d), d->philonum);
 			return (NULL);

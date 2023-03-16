@@ -6,14 +6,18 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 09:14:16 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/16 11:35:45 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:13:12 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+//either last one does not eat at all, or i get a deadlock %mondulo
 int	grabforks(t_data *d)
 {
+	if (&d->forks[d->philonum % d->nump] == &d->forks[(d->philonum)
+			% d->nump])
+		return (1);
 	if (pthread_mutex_lock(&d->forks[d->philonum % d->nump]) == 0)
 	{
 		printf("%ld %i has taken a fork\n", (long)millsect(d), d->philonum);

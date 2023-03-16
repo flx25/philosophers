@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:49:03 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/16 10:57:20 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:06:45 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_data
 	pthread_t		tid;
 	pthread_mutex_t	*forks;
 	int				timeseaten;
-	int				lasteat;
+	double			lasteat;
 	struct timeval	time;
 }				t_data;
 
