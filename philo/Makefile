@@ -6,7 +6,7 @@
 #    By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 08:54:25 by fvon-nag          #+#    #+#              #
-#    Updated: 2023/03/15 11:29:54 by fvon-nag         ###   ########.fr        #
+#    Updated: 2023/03/16 09:27:50 by fvon-nag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@
 SOURCES = main.c \
 		ft_atoi.c \
 		utils.c \
+		locking.c \
+
 
 
 BSOURCES =

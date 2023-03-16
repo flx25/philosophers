@@ -6,12 +6,12 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/15 16:40:22 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/16 11:39:16 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
+//need to fix die timer
 void	ptjoinall(t_data **d)
 {
 	int	i;
@@ -29,12 +29,18 @@ void	*philo(void *arg)
 	t_data	*d;
 
 	d = (t_data *) arg;
-	while (d->timeseaten < d->numberofndeats)
+	gettimeofday(&d->time, NULL);
+	d->lasteat = millsect(d);
+	printf("%i\n", d->nump);
+	while (d->timeseaten < d->numberofndeats || d->numberofndeats == 0)
 	{
-		if (pthread_mutex_lock(&d->forks[d->philonum]) == 0
-			&& pthread_mutex_lock(&d->forks[(d->philonum + 1) % d->nump]) == 0)
-			printf("Philo number: %i accesses both forks\n", d->philonum);
-		else
+		if (grabforks(d) == 0)
+			eatandsleep(d);
+		if (d->lasteat + d->ttodie >= millsect(d))
+		{
+			printf("%ld %i died\n", (long)millsect(d), d->philonum);
+			return (NULL);
+		}
 	}
 	return (NULL);
 }
@@ -61,6 +67,8 @@ int	filld(int argc, char **argv, t_data **d)
 		d[i]->timeseaten = 0;
 		if (argc == 6)
 			d[i]->numberofndeats = ft_atoi(argv[5]);
+		else
+			d[i]->numberofndeats = 0;
 		i++;
 	}
 	return (0);

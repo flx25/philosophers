@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:58:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/15 11:18:09 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/16 10:58:07 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,13 @@ void	initforks(t_data **d)
 	i = 0;
 	while (i < d[0]->nump)
 		d[i++]->forks = out;
+}
+
+double	millsect(t_data *d)
+{
+	long double	out;
+
+	gettimeofday(&d->time, NULL);
+	out = d->time.tv_sec * 1000 + d->time.tv_usec / 1000;
+	return (out);
 }
