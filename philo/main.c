@@ -6,12 +6,12 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/20 10:25:22 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:11:53 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
+// 1 philo still dies at ./philo 4 410 200 200
 void	ptjoinall(t_data **d)
 {
 	int	i;
@@ -37,7 +37,7 @@ void	*philo(void *arg)
 			eatandsleep(d);
 		if (d->lasteat + d->ttodie <= (long) millsect(d))
 		{
-			printf("%ld %i died\n", (long)millsect(d), d->philonum);
+			printf("%ld %i died\n", (long)millsect(d), d->philonum +1);
 			return (NULL);
 		}
 	}

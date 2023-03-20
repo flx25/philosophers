@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 09:14:16 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/20 10:33:55 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:04:08 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	grabforks(t_data *d)
 		return (1);
 	if (pthread_mutex_lock(&d->forks[d->fork1]) == 0)
 	{
+		if (d->lasteat + d->ttodie <= (long) millsect(d))
+		{
+			pthread_mutex_unlock(&d->forks[d->fork1]);
+			return (1);
+		}
 		printf("%ld %i has taken a fork\n", (long)millsect(d), d->philonum +1);
 		if (pthread_mutex_lock(&d->forks[d->fork2]) == 0)
 		{
