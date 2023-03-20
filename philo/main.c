@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/16 15:34:17 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:25:22 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	filld(int argc, char **argv, t_data **d)
 		d[i]->ttodie = ft_atoi(argv[2]);
 		d[i]->ttoeat = ft_atoi(argv[3]);
 		d[i]->ttosleep = ft_atoi(argv[4]);
-		d[i]->philonum = i + 1;
+		d[i]->philonum = i;
 		d[i]->timeseaten = 0;
 		if (argc == 6)
 			d[i]->numberofndeats = ft_atoi(argv[5]);
@@ -102,6 +102,7 @@ int	main(int argc, char **argv)
 	if (filld(argc, argv, d) == 1)
 		return (0);
 	initforks(d);
+	assignforks(d);
 	createthreads(d);
 	ptjoinall(d);
 	//destroy all mutexes

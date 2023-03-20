@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:49:03 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/16 15:06:45 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:15:01 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_data
 	int				ttosleep;
 	int				numberofndeats;
 	int				philonum;
+	int				fork1;
+	int				fork2;
 	pthread_t		tid;
 	pthread_mutex_t	*forks;
 	int				timeseaten;
@@ -39,5 +41,6 @@ void	initforks(t_data **d);
 int		grabforks(t_data *d);
 void	eatandsleep(t_data *d);
 double	millsect(t_data *d);
+void	assignforks(t_data **d);
 
 #endif

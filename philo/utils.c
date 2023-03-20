@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:58:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/16 10:58:07 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:18:20 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,26 @@ double	millsect(t_data *d)
 	gettimeofday(&d->time, NULL);
 	out = d->time.tv_sec * 1000 + d->time.tv_usec / 1000;
 	return (out);
+}
+
+void	assignforks(t_data **d)
+{
+	int	i;
+
+	i = 0;
+
+	while (i < d[0]->nump)
+	{
+		if (d[i]->philonum % 2 == 0)
+		{
+			d[i]->fork1 = d[i]->philonum;
+			d[i]->fork2 = (d[i]->philonum + 1) % d[0]->nump;
+		}
+		else
+		{
+			d[i]->fork1 = (d[i]->philonum + 1) % d[0]->nump;
+			d[i]->fork2 = d[i]->philonum;
+		}
+		i++;
+	}
 }
