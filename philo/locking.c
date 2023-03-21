@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 09:14:16 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/21 11:24:51 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:29:33 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,16 @@ int	grabforks(t_data *d)
 
 int	eatandsleep(t_data *d)
 {
-	long	currenttime;
-
-	currenttime = millsect(d);
-	if (currenttime + d->ttoeat > d->lasteat + d->ttodie)
-	{
-		pthread_mutex_unlock(&d->forks[d->philonum]);
-		pthread_mutex_unlock(&d->forks[(d->philonum + 1) % d->nump]);
-		return (1);
-	}
-	printf("%ld %i is eating\n", (long)millsect(d), d->philonum +1);
-	usleep(d->ttoeat * 1000);
 	d->lasteat = millsect(d);
 	d->timeseaten++;
-	pthread_mutex_unlock(&d->forks[d->philonum]);
-	pthread_mutex_unlock(&d->forks[(d->philonum + 1) % d->nump]);
+	printf("%ld %i is eating\n", (long) d->lasteat, d->philonum +1);
+	usleep(d->ttoeat * 1000);
+	pthread_mutex_unlock(&d->forks[d->fork2]);
+	pthread_mutex_unlock(&d->forks[d->fork1]);
 	printf("%ld %i is sleeping\n", (long)millsect(d), d->philonum +1);
 	usleep(d->ttosleep * 1000);
 	printf("%ld %i is thinking\n", (long)millsect(d), d->philonum +1);
+	// if (d->philonum % 2 == 1)
+	// 	usleep(((d->ttoeat - d->ttosleep) * 2) * 1000);
 	return (0);
 }

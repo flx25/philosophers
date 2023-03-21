@@ -6,15 +6,13 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/21 11:16:05 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:14:07 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-// 1 philo still dies at ./philo 4 410 200 200
-// philos should die while eating
+// philos are still dying at  4 410 200 200
 // maybe use usleeps with the time needed for eating instead or addition
-// problem with newly added code when there is limited eats
 void	ptjoinall(t_data **d)
 {
 	int	i;
@@ -30,16 +28,18 @@ void	ptjoinall(t_data **d)
 void	*philo(void *arg)
 {
 	t_data	*d;
-	int		noeattime;
+	int		waited;
 
+	waited = 0;
 	d = (t_data *) arg;
 	gettimeofday(&d->time, NULL);
 	d->lasteat = millsect(d);
+	usleep(((d->philonum % 3) * d->ttoeat) * 1000);
 	while (d->timeseaten < d->numberofndeats || d->numberofndeats == 0)
 	{
 		if (grabforks(d) == 0)
-			noeattime = eatandsleep(d);
-		while (noeattime == 1 && d->timeseaten < d->numberofndeats)
+			eatandsleep(d);
+		if (d->timeseaten < d->numberofndeats || d->numberofndeats == 0)
 		{
 			if (d->lasteat + d->ttodie <= (long) millsect(d))
 			{
