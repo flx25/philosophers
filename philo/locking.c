@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 09:14:16 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/21 15:29:33 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/22 10:08:39 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	grabforks(t_data *d)
 
 int	eatandsleep(t_data *d)
 {
+	if (d->ttodie < d->ttoeat)
+		return (1);
 	d->lasteat = millsect(d);
 	d->timeseaten++;
 	printf("%ld %i is eating\n", (long) d->lasteat, d->philonum +1);
@@ -47,7 +49,7 @@ int	eatandsleep(t_data *d)
 	printf("%ld %i is sleeping\n", (long)millsect(d), d->philonum +1);
 	usleep(d->ttosleep * 1000);
 	printf("%ld %i is thinking\n", (long)millsect(d), d->philonum +1);
-	// if (d->philonum % 2 == 1)
-	// 	usleep(((d->ttoeat - d->ttosleep) * 2) * 1000);
+	if (d->philonum % 2 == 1)
+		usleep(((d->ttoeat * 2) - d->ttosleep) * 1000);
 	return (0);
 }

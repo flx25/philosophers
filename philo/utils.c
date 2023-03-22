@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:58:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/20 10:18:20 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:59:07 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	initforks(t_data **d)
 		d[i++]->forks = out;
 }
 
-double	millsect(t_data *d)
+double	millsectf(t_data *d)
 {
 	long double	out;
 
@@ -35,12 +35,20 @@ double	millsect(t_data *d)
 	return (out);
 }
 
+double	millsect(t_data *d)
+{
+	long double	out;
+
+	gettimeofday(&d->time, NULL);
+	out = millsectf(d) - d->starttime;
+	return (out);
+}
+
 void	assignforks(t_data **d)
 {
 	int	i;
 
 	i = 0;
-
 	while (i < d[0]->nump)
 	{
 		if (d[i]->philonum % 2 == 0)

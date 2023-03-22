@@ -6,13 +6,14 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/21 15:14:07 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:58:34 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 // philos are still dying at  4 410 200 200
 // maybe use usleeps with the time needed for eating instead or addition
+// maybe i am converting too much from my millisec function
 void	ptjoinall(t_data **d)
 {
 	int	i;
@@ -34,7 +35,7 @@ void	*philo(void *arg)
 	d = (t_data *) arg;
 	gettimeofday(&d->time, NULL);
 	d->lasteat = millsect(d);
-	usleep(((d->philonum % 3) * d->ttoeat) * 1000);
+	// usleep(((d->philonum % 3) * d->ttoeat) * 1000);
 	while (d->timeseaten < d->numberofndeats || d->numberofndeats == 0)
 	{
 		if (grabforks(d) == 0)
@@ -88,6 +89,7 @@ void	createthreads(t_data **d)
 	while (i < d[0]->nump)
 	{
 		pthread_create(&d[i]->tid, NULL, philo, d[i]);
+		d[i]->starttime = millsect(d[i]);
 		i++;
 	}
 }
