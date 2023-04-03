@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/22 13:58:34 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/04/03 08:36:39 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 // philos are still dying at  4 410 200 200
 // maybe use usleeps with the time needed for eating instead or addition
 // maybe i am converting too much from my millisec function
+// philos die 10 milsecs too early
 void	ptjoinall(t_data **d)
 {
 	int	i;
