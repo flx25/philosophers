@@ -6,15 +6,18 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/04/03 08:36:39 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:42:06 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-// philos are still dying at  4 410 200 200
+
+// need custom usleep
+// two dying at 4 310 200 100
 // maybe use usleeps with the time needed for eating instead or addition
 // maybe i am converting too much from my millisec function
-// philos die 10 milsecs too early
+// philos die 10 milsecs too early <-
+// now they die 100 seconds to late maybe
 void	ptjoinall(t_data **d)
 {
 	int	i;
@@ -36,7 +39,7 @@ void	*philo(void *arg)
 	d = (t_data *) arg;
 	gettimeofday(&d->time, NULL);
 	d->lasteat = millsect(d);
-	// usleep(((d->philonum % 3) * d->ttoeat) * 1000);
+	// sleepmil(((d->philonum % 3) * d->ttoeat), d);
 	while (d->timeseaten < d->numberofndeats || d->numberofndeats == 0)
 	{
 		if (grabforks(d) == 0)

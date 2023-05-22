@@ -6,11 +6,20 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:58:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/22 13:59:07 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:40:05 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	sleepmil(int waittime, t_data *d)
+{
+	long double	endtime;
+
+	endtime = millsect(d) + waittime;
+	while (millsect(d) < endtime)
+		usleep(10);
+}
 
 void	initforks(t_data **d)
 {

@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:49:03 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/22 13:58:49 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:35:50 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ int		eatandsleep(t_data *d);
 double	millsect(t_data *d);
 void	assignforks(t_data **d);
 double	millsectf(t_data *d);
+void	sleepmil(int waittime, t_data *d);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 09:14:16 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/03/22 10:08:39 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:57:43 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ int	eatandsleep(t_data *d)
 	d->lasteat = millsect(d);
 	d->timeseaten++;
 	printf("%ld %i is eating\n", (long) d->lasteat, d->philonum +1);
-	usleep(d->ttoeat * 1000);
+	sleepmil(d->ttoeat, d);
 	pthread_mutex_unlock(&d->forks[d->fork2]);
 	pthread_mutex_unlock(&d->forks[d->fork1]);
 	printf("%ld %i is sleeping\n", (long)millsect(d), d->philonum +1);
-	usleep(d->ttosleep * 1000);
+	sleepmil(d->ttosleep, d);
 	printf("%ld %i is thinking\n", (long)millsect(d), d->philonum +1);
-	if (d->philonum % 2 == 1)
-		usleep(((d->ttoeat * 2) - d->ttosleep) * 1000);
+	// if (d->philonum % 2 == 1) //-> seems to work better without this
+	// 	sleepmil(((d->ttoeat * 2) - d->ttosleep), d);
 	return (0);
 }
