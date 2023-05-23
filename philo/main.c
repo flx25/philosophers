@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/05/22 11:42:06 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/05/23 10:41:39 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 // need custom usleep
 // two dying at 4 310 200 100
+// all should die when one is dead -> isdead pointer to this
+// maybe more mutexes (especially for isdead)
 // maybe use usleeps with the time needed for eating instead or addition
 // maybe i am converting too much from my millisec function
 // philos die 10 milsecs too early <-
