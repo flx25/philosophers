@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 09:14:16 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/05/24 10:59:11 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:31:46 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	eatandsleep(t_data *d)
 	sleepmil(d->ttoeat, d);
 	pthread_mutex_unlock(&d->forks[d->fork2]);
 	pthread_mutex_unlock(&d->forks[d->fork1]);
+	if (*d->onedied == 1)
+		return (1);
 	printf("%ld %i is sleeping\n", (long)millsect(d), d->philonum +1);
 	sleepmil(d->ttosleep, d);
 	printf("%ld %i is thinking\n", (long)millsect(d), d->philonum +1);

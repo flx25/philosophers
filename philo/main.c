@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/05/24 14:18:57 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:29:07 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,15 @@ void	*philo(void *arg)
 			eatandsleep(d);
 		if (d->timeseaten < d->numberofndeats || d->numberofndeats == 0)
 		{
-			if (!*d->onedied && d->lasteat + d->ttodie <= (long) millsect(d))
+			if ((!pthread_mutex_lock(d->onediedm) && (!*d->onedied && d->lasteat + d->ttodie <= (long) millsect(d))))
 			{
 				printf("%ld %i died\n", (long)millsect(d), d->philonum +1);
-				*d->onedied = 1; // need to mutex maybe
+				*d->onedied = 1; // need to mutex maybe -> data race yes mutex needed
+				pthread_mutex_unlock(d->onediedm);
 				return (NULL);
 			}
+			else
+				pthread_mutex_unlock(d->onediedm);
 		}
 	}
 	return (NULL);
