@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:49:03 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/05/22 10:35:50 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:13:05 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_data
 	int				fork2;
 	pthread_t		tid;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	*onediedm;
+	int				*onedied;
 	int				timeseaten;
 	double			lasteat;
 	struct timeval	time;
@@ -45,5 +47,6 @@ double	millsect(t_data *d);
 void	assignforks(t_data **d);
 double	millsectf(t_data *d);
 void	sleepmil(int waittime, t_data *d);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 #endif
