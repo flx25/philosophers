@@ -6,17 +6,14 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/05/24 14:29:07 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:54:29 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// need to adapt the passing of the onedied mutex
-// two dying at 4 310 200 100
-// all should die when one is dead -> isdead pointer to this
-// maybe more mutexes (especially for isdead)
-// still more than 1 dies, maybe use mutexes on isdead or something
+
+// philosophers die to late because they wait for the mutexes to be free before dying
 // maybe use usleeps with the time needed for eating instead or addition
 // maybe i am converting too much from my millisec function
 // philos die 10 milsecs too early <-

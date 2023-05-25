@@ -6,7 +6,7 @@
 #    By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 08:54:25 by fvon-nag          #+#    #+#              #
-#    Updated: 2023/05/24 14:30:08 by fvon-nag         ###   ########.fr        #
+#    Updated: 2023/05/25 11:40:08 by fvon-nag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ BOBJECTS = $(BSOURCES:.c=.o)
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -pthread
 
 $(NAME): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $(OBJECTS)
