@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 09:14:16 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/05/25 11:53:36 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:33:38 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	grabforks(t_data *d)
 {
 	if (d->nump == 1 || d->ttodie < d->ttoeat || d->ttodie < d->ttosleep
-		|| d->lasteat + d->ttodie <= (long) millsect(d))
+		|| d->lasteat + d->ttodie <= (long) millsect(d)) // these return checks may are over kill
 		return (1);
 	if (pthread_mutex_lock(&d->forks[d->fork1]) == 0) // gets stuck here
 	{
@@ -39,7 +39,7 @@ int	grabforks(t_data *d)
 
 int	eatandsleep(t_data *d)
 {
-	if (d->ttodie < d->ttoeat || d->ttodie < d->ttosleep
+	if (d->ttodie < d->ttoeat || d->ttodie < d->ttosleep // these return checks may are over kill
 		|| d->lasteat + d->ttodie <= (long) millsect(d))
 		return (1);
 	d->lasteat = millsect(d);

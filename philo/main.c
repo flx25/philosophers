@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/05/25 11:54:29 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/06/06 10:44:32 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 
 // philosophers die to late because they wait for the mutexes to be free before dying
+// -> kill them from the parent process
 // maybe use usleeps with the time needed for eating instead or addition
 // maybe i am converting too much from my millisec function
 // philos die 10 milsecs too early <-
 // now they die 100 seconds to late maybe
-void	ptjoinall(t_data **d)
+// ./philo 4 310 200 100
+// ./philo 5 800 200 200 someone dies still
+void	ptjoinall(t_data **d) // maybe do not need this
 {
 	int	i;
 
@@ -49,7 +52,6 @@ void	*philo(void *arg)
 		{
 			if ((!pthread_mutex_lock(d->onediedm) && (!*d->onedied && d->lasteat + d->ttodie <= (long) millsect(d))))
 			{
-				printf("%ld %i died\n", (long)millsect(d), d->philonum +1);
 				*d->onedied = 1; // need to mutex maybe -> data race yes mutex needed
 				pthread_mutex_unlock(d->onediedm);
 				return (NULL);
@@ -118,6 +120,7 @@ int	main(int argc, char **argv)
 	initforks(d);
 	assignforks(d);
 	createthreads(d);
+	checkfordeath(d);
 	ptjoinall(d);
 	//destroy all mutexes
 	free(d); //free every node seperate
