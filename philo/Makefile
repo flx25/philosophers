@@ -6,7 +6,7 @@
 #    By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/13 08:54:25 by fvon-nag          #+#    #+#              #
-#    Updated: 2023/06/06 09:41:03 by fvon-nag         ###   ########.fr        #
+#    Updated: 2023/06/08 09:58:57 by fvon-nag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ SOURCES = main.c \
 		locking.c \
 		libft_functions.c \
 		main_2.c \
+		utils_2.c \
+
 
 
 

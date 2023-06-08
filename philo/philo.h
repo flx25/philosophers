@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:49:03 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/06/06 09:35:25 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/06/08 09:58:37 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_data
 	pthread_t		tid;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*onediedm;
+	pthread_mutex_t	*printfm;
 	int				*onedied;
 	int				timeseaten;
 	double			lasteat;
@@ -49,5 +50,6 @@ double	millsectf(t_data *d);
 void	sleepmil(int waittime, t_data *d);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	checkfordeath(t_data **d);
+int		mt_printf(char *str, t_data *d);
 
 #endif

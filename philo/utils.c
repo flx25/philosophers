@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:58:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/05/24 11:29:17 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/06/08 09:50:37 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	initforks(t_data **d)
 	int				i;
 	pthread_mutex_t	*out;
 	pthread_mutex_t	*onediedm;
+	pthread_mutex_t	*printfm;
 
 	out = malloc(d[0]->nump * sizeof(pthread_mutex_t));
 	onediedm = malloc(sizeof(pthread_mutex_t));
+	printfm = malloc(sizeof(pthread_mutex_t));
 	i = 0;
 	pthread_mutex_init(onediedm, NULL);
 	while (i < d[0]->nump)
@@ -37,6 +39,7 @@ void	initforks(t_data **d)
 	while (i < d[0]->nump)
 	{
 		d[i]->onediedm = onediedm;
+		d[i]->printfm = printfm;
 		d[i++]->forks = out;
 	}
 }

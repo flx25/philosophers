@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/06/06 10:44:32 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/06/07 09:59:44 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 // now they die 100 seconds to late maybe
 // ./philo 4 310 200 100
 // ./philo 5 800 200 200 someone dies still
+// maybe need to unlock mutexes on dying
+// need to find a way to exit clean, exit is forbidden
+// messages still print after death
 void	ptjoinall(t_data **d) // maybe do not need this
 {
 	int	i;
@@ -48,17 +51,8 @@ void	*philo(void *arg)
 	{
 		if (!*d->onedied && grabforks(d) == 0)
 			eatandsleep(d);
-		if (d->timeseaten < d->numberofndeats || d->numberofndeats == 0)
-		{
-			if ((!pthread_mutex_lock(d->onediedm) && (!*d->onedied && d->lasteat + d->ttodie <= (long) millsect(d))))
-			{
-				*d->onedied = 1; // need to mutex maybe -> data race yes mutex needed
-				pthread_mutex_unlock(d->onediedm);
-				return (NULL);
-			}
-			else
-				pthread_mutex_unlock(d->onediedm);
-		}
+		if (*d->onedied)
+			return (NULL);
 	}
 	return (NULL);
 }
