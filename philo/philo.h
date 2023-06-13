@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:49:03 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/06/08 09:58:37 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:29:18 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	sleepmil(int waittime, t_data *d);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	checkfordeath(t_data **d);
 int		mt_printf(char *str, t_data *d);
+int 	ft_strcmp(char *s1, char *s2);
 
 #endif
