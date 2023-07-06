@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/06 10:01:30 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:18:31 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,29 @@ void	ptjoinall(t_data **d) // maybe do not need this
 void	*philo(void *arg)
 {
 	t_data	*d;
-	//int		waited;
+	int		lastprinted;
 
 	//waited = 0;
 	d = (t_data *) arg;
 	gettimeofday(&d->time, NULL);
 	d->lasteat = millsect(d);
+	lastprinted = 0;
 	// sleepmil(((d->philonum % 3) * d->ttoeat), d);
-	while (!*d->onedied && (d->timeseaten < d->numberofndeats
+	while (!lastprinted && (d->timeseaten < d->numberofndeats
 			|| d->numberofndeats == 0))
 	{
-		if (!*d->onedied && grabforks(d) == 0)
+		pthread_mutex_lock(d->lastprintedm);
+		lastprinted = *d->lastprinted;
+		pthread_mutex_unlock(d->lastprintedm);
+		if (!lastprinted && grabforks(d) == 0)
 			eatandsleep(d);
-		if (*d->onedied)
+		if (lastprinted)
 			return (NULL);
 	}
 	return (NULL);
 }
 
-int	filld(int argc, char **argv, t_data **d, int *isdead)
+int	filld(int argc, char **argv, t_data **d, int *isdead, int *lastprinted)
 {
 	int	i;
 	int	nump;
@@ -72,6 +76,7 @@ int	filld(int argc, char **argv, t_data **d, int *isdead)
 		d[i]->ttosleep = ft_atoi(argv[4]);
 		d[i]->philonum = i;
 		d[i]->onedied = isdead;
+		d[i]->lastprinted = lastprinted;
 		if (argc == 6)
 			d[i]->numberofndeats = ft_atoi(argv[5]);
 		i++;
@@ -98,6 +103,7 @@ int	main(int argc, char **argv)
 	int		i;
 	int		nump;
 	int		isdead;
+	int		lastprinted;
 
 	isdead = 0;
 	if (argc < 5)
@@ -107,10 +113,10 @@ int	main(int argc, char **argv)
 	d = ft_calloc(nump, sizeof(t_data *));
 	while (i < nump)
 	{
-		d[i] = malloc(nump * sizeof(t_data));
+		d[i] = ft_calloc(nump, sizeof(t_data));
 		i++;
 	}
-	filld(argc, argv, d, &isdead);
+	filld(argc, argv, d, &isdead, &lastprinted);
 	initforks(d);
 	assignforks(d);
 	createthreads(d);

@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 09:52:17 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/06 11:56:37 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:18:55 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,24 @@
 int	mt_printf(char *str, t_data *d)
 {
 	int	out;
+	int	onedied;
 
 	out = 0;
 	pthread_mutex_lock(d->printfm);
-	pthread_mutex_lock(d->onediedm);// does not work for when someone dies
-	if (*d->onedied && ft_strcmp(str, "%ld %i died\n"))
+	// pthread_mutex_lock(d->onediedm); // does not work for when someone dies
+	onedied = *d->onedied;
+	// pthread_mutex_unlock(d->onediedm);
+	pthread_mutex_lock(d->lastprintedm);
+	if (!*d->lastprinted && onedied && ft_strcmp(str, "%ld %i died\n"))
 	{
 
 		out = printf(str, (long)millsect(d), d->philonum +1);
+		*d->lastprinted = 1;
+		pthread_mutex_unlock(d->lastprintedm);
 		pthread_mutex_unlock(d->printfm);
-		pthread_mutex_unlock(d->onediedm);
 		return (out);
 	}
-	pthread_mutex_unlock(d->onediedm);
+	pthread_mutex_unlock(d->lastprintedm);
 	out = printf(str, (long)millsect(d), d->philonum +1);
 	pthread_mutex_unlock(d->printfm);
 
