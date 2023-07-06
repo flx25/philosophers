@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/06/13 11:28:52 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/06 10:01:30 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	ptjoinall(t_data **d) // maybe do not need this
 void	*philo(void *arg)
 {
 	t_data	*d;
-	int		waited;
+	//int		waited;
 
-	waited = 0;
+	//waited = 0;
 	d = (t_data *) arg;
 	gettimeofday(&d->time, NULL);
 	d->lasteat = millsect(d);
