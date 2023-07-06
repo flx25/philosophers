@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:49:03 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/06/13 11:29:18 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/06 11:58:10 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ typedef struct s_data
 	pthread_t		tid;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*onediedm;
+	pthread_mutex_t	*lastprintedm;
 	pthread_mutex_t	*printfm;
 	int				*onedied;
+	int				*lastprinted;
 	int				timeseaten;
 	double			lasteat;
 	struct timeval	time;
