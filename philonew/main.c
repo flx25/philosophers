@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/18 09:43:37 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:03:30 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	*philo(void *arg)
 	while (!lastprinted && (d->timeseaten < d->numberofndeats
 			|| d->numberofndeats == 0))
 	{
-		pthread_mutex_lock(d->lastprintedm);
+		pthread_mutex_lock(d->datam);
 		lastprinted = *d->lastprinted;
-		pthread_mutex_unlock(d->lastprintedm);
+		pthread_mutex_unlock(d->datam);
 		if (!lastprinted && grabforks(d) == 0)
 			eatandsleep(d);
 		if (lastprinted)
