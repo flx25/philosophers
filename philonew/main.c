@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/18 10:49:10 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:12:13 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // ./philo 5 800 200 200 someone dies still
 // maybe need to unlock mutexes on dying
 // need to find a way to exit clean, exit is forbidden
-// messages still print after death
+
 void	ptjoinall(t_data **d) // maybe do not need this
 {
 	int	i;
@@ -40,7 +40,7 @@ void	*philo(void *arg)
 	gettimeofday(&d->time, NULL);
 	d->lasteat = millsect(d);
 	lastprinted = 0;
-	// sleepmil(((d->philonum % 3) * d->ttoeat), d);
+	//sleepmil(((d->philonum % 3) * d->ttoeat), d);
 	while (!lastprinted && (d->timeseaten < d->numberofndeats
 			|| d->numberofndeats == 0))
 	{
