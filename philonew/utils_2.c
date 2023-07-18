@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 09:52:17 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/18 10:42:08 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:53:25 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	mt_printf(char *str, t_data *d)
 		return (pthread_mutex_unlock(d->datam), 0);
 	pthread_mutex_lock(d->printfm);
 	onedied = *d->onedied;
-	if (!*d->lastprinted && onedied && ft_strcmp(str, "%ld %i died\n"))
+	if (!*d->lastprinted && onedied && !ft_strcmp(str, "%ld %i died\n"))
 	{
 
 		out = printf(str, (long)millsect(d), d->philonum +1);

@@ -6,20 +6,13 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/18 10:39:24 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:49:10 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// maybe use one mutex for all data
-// need to configure clion for norm format
-// philosophers die to late because they wait for the mutexes to be free before dying
-// -> kill them from the parent process
 // maybe use usleeps with the time needed for eating instead or addition
-// maybe i am converting too much from my millisec function
-// philos die 10 milsecs too early <-
-// now they die 100 seconds to late maybe
 // ./philo 4 310 200 100
 // ./philo 5 800 200 200 someone dies still
 // maybe need to unlock mutexes on dying
