@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:24:25 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/06/13 10:27:56 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/18 09:09:45 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ void	checkfordeath(t_data **d)
 		i = 0;
 		while (i < d[0]->nump)
 		{
+			// pthread_mutex_lock(d[i]->lastprintedm);//deadlock gone when rm this
 			if (d[i]->lasteat + d[i]->ttodie <= (long) millsect(d[i])
-				&& !pthread_mutex_lock(d[i]->onediedm)) //deadlock gone when rm this
+			&& !*d[i]->lastprinted)
 			{
 				mt_printf("%ld %i died\n", d[i]);
 				*d[0]->onedied = 1;
 				pthread_mutex_unlock(d[i]->onediedm);
 			}
+			// pthread_mutex_unlock(d[i]->lastprintedm);
 			i++;
 		}
 

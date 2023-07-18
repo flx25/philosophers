@@ -6,12 +6,13 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/06 14:18:31 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/18 09:43:37 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// maybe use one mutex for all data
 // need to configure clion for norm format
 // philosophers die to late because they wait for the mutexes to be free before dying
 // -> kill them from the parent process

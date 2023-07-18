@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 09:52:17 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/06 14:18:55 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/18 09:11:38 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ int	mt_printf(char *str, t_data *d)
 	int	onedied;
 
 	out = 0;
+	if (*d->lastprinted || (*d->onedied && ft_strcmp(str, "%ld %i died\n") != 0))
+		return (0);
 	pthread_mutex_lock(d->printfm);
-	// pthread_mutex_lock(d->onediedm); // does not work for when someone dies
+	pthread_mutex_lock(d->onediedm); // does not work for when someone dies
 	onedied = *d->onedied;
-	// pthread_mutex_unlock(d->onediedm);
+	pthread_mutex_unlock(d->onediedm);
 	pthread_mutex_lock(d->lastprintedm);
 	if (!*d->lastprinted && onedied && ft_strcmp(str, "%ld %i died\n"))
 	{
