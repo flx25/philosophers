@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/18 10:03:30 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:39:24 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	main(int argc, char **argv)
 	initforks(d);
 	assignforks(d);
 	createthreads(d);
-	checkfordeath(d);
+	checkfunct(d);
 	ptjoinall(d);
 	//destroy all mutexes
 	free(d); //free every node seperate
