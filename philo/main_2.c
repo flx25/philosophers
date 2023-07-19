@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:24:25 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/19 11:35:45 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:15:36 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ void	checkfunct(t_data **d)
 				return ;
 			}
 			else if (d[i]->timeseaten >= d[i]->numberofndeats)
-				*d[i]->nsfinishedprinting++;
+				d[0]->nsfinishedprinting++; // now adds for every single one
 			pthread_mutex_unlock(d[i]->datam);
 			i++;
 		}
-
+		if (d[0]->numberofndeats && d[0]->nsfinishedprinting >= d[0]->nump)
+			return ;
 	}
 	//maybe exit here manually after checking the times for every philo
 
