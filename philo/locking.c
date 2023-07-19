@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 09:14:16 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/18 10:45:53 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:58:33 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@ int	grabforks(t_data *d)
 			pthread_mutex_unlock(&d->forks[d->fork1]);
 			return (1);
 		}
+		pthread_mutex_lock(d->datam);
 		mt_printf("%ld %i has taken a fork\n", d);
+		pthread_mutex_unlock(d->datam);
 		if (pthread_mutex_lock(&d->forks[d->fork2]) == 0)
 		{
+			pthread_mutex_lock(d->datam);
 			mt_printf("%ld %i has taken a fork\n", d);
+			pthread_mutex_unlock(d->datam);
 			return (0);
 		}
 		else
@@ -38,11 +42,14 @@ int	grabforks(t_data *d)
 
 int	eatandsleep(t_data *d)
 {
+
 	if (d->ttodie < d->ttoeat || d->ttodie < d->ttosleep // these return checks may are over kill
 		|| d->lasteat + d->ttodie <= (long) millsect(d))
 		return (1);
+	pthread_mutex_lock(d->datam);
 	d->lasteat = millsect(d);
 	d->timeseaten++;
+	pthread_mutex_unlock(d->datam);
 	pthread_mutex_lock(d->datam);
 	mt_printf("%ld %i is eating\n", d);
 	pthread_mutex_unlock(d->datam);

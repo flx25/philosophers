@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/18 11:12:13 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:37:31 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 // maybe use usleeps with the time needed for eating instead or addition
 // ./philo 4 310 200 100
-// ./philo 5 800 200 200 someone dies still
+// ./philo 5 800 200 200
+// ./philo 5 800 200 200 7 one dies for some reason, data race (+ leaks)
 // maybe need to unlock mutexes on dying
 // need to find a way to exit clean, exit is forbidden
+// leaks when it ends
+
+// need to make nsfinishedprinting initialized as multiple pointers to same int
 
 void	ptjoinall(t_data **d) // maybe do not need this
 {
@@ -33,24 +37,22 @@ void	ptjoinall(t_data **d) // maybe do not need this
 void	*philo(void *arg)
 {
 	t_data	*d;
-	int		lastprinted;
 
 	//waited = 0;
 	d = (t_data *) arg;
 	gettimeofday(&d->time, NULL);
+	pthread_mutex_lock(d->datam);
 	d->lasteat = millsect(d);
-	lastprinted = 0;
+	pthread_mutex_unlock(d->datam);
+
 	//sleepmil(((d->philonum % 3) * d->ttoeat), d);
-	while (!lastprinted && (d->timeseaten < d->numberofndeats
+	while ((d->timeseaten < d->numberofndeats
 			|| d->numberofndeats == 0))
 	{
-		pthread_mutex_lock(d->datam);
-		lastprinted = *d->lastprinted;
-		pthread_mutex_unlock(d->datam);
-		if (!lastprinted && grabforks(d) == 0)
+		if (grabforks(d) == 0)
 			eatandsleep(d);
-		if (lastprinted)
-			return (NULL);
+		// if (lastprinted)
+		// 	return (NULL);
 	}
 	return (NULL);
 }
@@ -97,7 +99,7 @@ int	main(int argc, char **argv)
 	int		i;
 	int		nump;
 	int		isdead;
-	int		lastprinted;
+	int		lastprinted; //maybe not needed
 
 	isdead = 0;
 	if (argc < 5)
@@ -115,6 +117,7 @@ int	main(int argc, char **argv)
 	assignforks(d);
 	createthreads(d);
 	checkfunct(d);
+	return (0); // still need to destroy mutexes and free, just temporary
 	ptjoinall(d);
 	//destroy all mutexes
 	free(d); //free every node seperate
