@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:58:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/06 13:46:39 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:05:50 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,23 @@ void	initforks(t_data **d)
 {
 	int				i;
 	pthread_mutex_t	*out;
-	pthread_mutex_t	*onediedm;
+	pthread_mutex_t	*datam;
 	pthread_mutex_t	*printfm;
-	pthread_mutex_t	*lastprintedm;
 
 
 	out = malloc(d[0]->nump * sizeof(pthread_mutex_t));
-	onediedm = malloc(sizeof(pthread_mutex_t));
+	datam = malloc(sizeof(pthread_mutex_t));
 	printfm = malloc(sizeof(pthread_mutex_t));
-	lastprintedm = malloc(sizeof(pthread_mutex_t));
 	i = 0;
-	pthread_mutex_init(onediedm, NULL);
+	pthread_mutex_init(datam, NULL);
 	pthread_mutex_init(printfm, NULL);
-	pthread_mutex_init(lastprintedm, NULL);
 	while (i < d[0]->nump)
 		pthread_mutex_init(&out[i++], NULL);
 	i = 0;
 	while (i < d[0]->nump)
 	{
-		d[i]->onediedm = onediedm;
+		d[i]->datam = datam;
 		d[i]->printfm = printfm;
-		d[i]->lastprintedm = lastprintedm;
 		d[i++]->forks = out;
 	}
 }

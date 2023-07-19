@@ -6,18 +6,25 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/18 11:12:13 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/18 09:43:37 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// maybe use one mutex for all data
+// need to configure clion for norm format
+// philosophers die to late because they wait for the mutexes to be free before dying
+// -> kill them from the parent process
 // maybe use usleeps with the time needed for eating instead or addition
+// maybe i am converting too much from my millisec function
+// philos die 10 milsecs too early <-
+// now they die 100 seconds to late maybe
 // ./philo 4 310 200 100
 // ./philo 5 800 200 200 someone dies still
 // maybe need to unlock mutexes on dying
 // need to find a way to exit clean, exit is forbidden
-
+// messages still print after death
 void	ptjoinall(t_data **d) // maybe do not need this
 {
 	int	i;
@@ -40,13 +47,13 @@ void	*philo(void *arg)
 	gettimeofday(&d->time, NULL);
 	d->lasteat = millsect(d);
 	lastprinted = 0;
-	//sleepmil(((d->philonum % 3) * d->ttoeat), d);
+	// sleepmil(((d->philonum % 3) * d->ttoeat), d);
 	while (!lastprinted && (d->timeseaten < d->numberofndeats
 			|| d->numberofndeats == 0))
 	{
-		pthread_mutex_lock(d->datam);
+		pthread_mutex_lock(d->lastprintedm);
 		lastprinted = *d->lastprinted;
-		pthread_mutex_unlock(d->datam);
+		pthread_mutex_unlock(d->lastprintedm);
 		if (!lastprinted && grabforks(d) == 0)
 			eatandsleep(d);
 		if (lastprinted)
@@ -114,7 +121,7 @@ int	main(int argc, char **argv)
 	initforks(d);
 	assignforks(d);
 	createthreads(d);
-	checkfunct(d);
+	checkfordeath(d);
 	ptjoinall(d);
 	//destroy all mutexes
 	free(d); //free every node seperate
