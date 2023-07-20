@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:49:03 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/19 11:34:08 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/20 09:39:03 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_data
 	double			lasteat;
 	struct timeval	time;
 	double			starttime;
-	int				nsfinishedprinting;
+	int				finished;
 }				t_data;
 
 int		ft_atoi(const char *nptr);
@@ -51,7 +51,7 @@ void	assignforks(t_data **d);
 double	millsectf(t_data *d);
 void	sleepmil(int waittime, t_data *d);
 void	*ft_calloc(size_t nmemb, size_t size);
-void	checkfunct(t_data **d);
+int		checkfunct(t_data **d);
 int		mt_printf(char *str, t_data *d);
 int		ft_strcmp(char *s1, char *s2);
 

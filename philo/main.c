@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/19 11:37:31 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/20 09:44:17 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void	*philo(void *arg)
 		// if (lastprinted)
 		// 	return (NULL);
 	}
-	return (NULL);
+	pthread_mutex_lock(d->datam);
+	d->finished = 1;	//need to put this were they are eating maybe
+	return (pthread_mutex_unlock(d->datam), NULL);
 }
 
 int	filld(int argc, char **argv, t_data **d, int *isdead, int *lastprinted)

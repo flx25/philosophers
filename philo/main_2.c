@@ -6,13 +6,32 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:24:25 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/19 11:35:45 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/20 09:40:14 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	checkfunct(t_data **d)
+int	checkforallprinted(t_data **d)
+{
+	int	i;
+	int	finished;
+
+	i = 0;
+	finished = 0;
+	while (i < d[0]->nump)
+	{
+		if (d[i]->finished == 1)
+			finished++;
+		i++;
+	}
+	if (finished == d[0]->nump)
+		return (1);
+	else
+		return (0);
+}
+
+int	checkfunct(t_data **d)
 {
 	int	i;
 	int	oneddied;
@@ -30,15 +49,13 @@ void	checkfunct(t_data **d)
 				*d[i]->onedied = 1;
 				oneddied = 1;
 				mt_printf("%ld %i died\n", d[i]);
-				return ;
+				return (0);
 			}
-			else if (d[i]->timeseaten >= d[i]->numberofndeats)
-				*d[i]->nsfinishedprinting++;
+			if (checkforallprinted(d))
+				return (pthread_mutex_unlock(d[i]->datam), 0);
 			pthread_mutex_unlock(d[i]->datam);
 			i++;
 		}
-
 	}
-	//maybe exit here manually after checking the times for every philo
-
+	return (0);
 }
