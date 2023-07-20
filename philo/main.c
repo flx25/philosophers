@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/19 12:52:25 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:37:31 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 // need to find a way to exit clean, exit is forbidden
 // leaks when it ends
 
-// need to make nsfinishedprinting initialized as multiple pointers to same int can just use [0 maybe]
+// need to make nsfinishedprinting initialized as multiple pointers to same int
 
 void	ptjoinall(t_data **d) // maybe do not need this
 {
