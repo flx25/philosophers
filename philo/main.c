@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/20 09:44:17 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/20 11:01:56 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // maybe need to unlock mutexes on dying
 // need to find a way to exit clean, exit is forbidden
 // leaks when it ends
-
+// could unmutex read operations (only mutex writes)
 // need to make nsfinishedprinting initialized as multiple pointers to same int
 
 void	ptjoinall(t_data **d) // maybe do not need this
@@ -51,15 +51,18 @@ void	*philo(void *arg)
 	{
 		if (grabforks(d) == 0)
 			eatandsleep(d);
-		// if (lastprinted)
-		// 	return (NULL);
+		// pthread_mutex_lock(d->datam);
+		if (*d->allfinished) // data race here at access, mutex fixes it but changes stop timing with limit
+			return (NULL);
+		// pthread_mutex_unlock(d->datam);
 	}
-	pthread_mutex_lock(d->datam);
-	d->finished = 1;	//need to put this were they are eating maybe
-	return (pthread_mutex_unlock(d->datam), NULL);
+	return (NULL);
+	// pthread_mutex_lock(d->datam);
+	// d->finished = 1;	//need to put this were they are eating maybe
+	// return (pthread_mutex_unlock(d->datam), NULL);
 }
 
-int	filld(int argc, char **argv, t_data **d, int *isdead, int *lastprinted)
+int	filld(int argc, char **argv, t_data **d, int *lastprinted, int *finishedall, int *isdead)
 {
 	int	i;
 	int	nump;
@@ -74,6 +77,7 @@ int	filld(int argc, char **argv, t_data **d, int *isdead, int *lastprinted)
 		d[i]->ttosleep = ft_atoi(argv[4]);
 		d[i]->philonum = i;
 		d[i]->onedied = isdead;
+		d[i]->allfinished = finishedall;
 		d[i]->lastprinted = lastprinted;
 		if (argc == 6)
 			d[i]->numberofndeats = ft_atoi(argv[5]);
@@ -100,10 +104,12 @@ int	main(int argc, char **argv)
 	t_data	**d;
 	int		i;
 	int		nump;
+	int		lastprinted;
+	int		finishedall; //make these struct -> adapt filld
 	int		isdead;
-	int		lastprinted; //maybe not needed
 
 	isdead = 0;
+	finishedall = 0;
 	if (argc < 5)
 		return (printf("Please enter at least 4 arguments!\n"), 0);
 	i = 0;
@@ -114,7 +120,7 @@ int	main(int argc, char **argv)
 		d[i] = ft_calloc(nump, sizeof(t_data));
 		i++;
 	}
-	filld(argc, argv, d, &isdead, &lastprinted);
+	filld(argc, argv, d, &lastprinted, &finishedall, &isdead);
 	initforks(d);
 	assignforks(d);
 	createthreads(d);

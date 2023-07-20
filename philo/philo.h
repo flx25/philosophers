@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:49:03 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/20 09:39:03 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:37:18 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_data
 	struct timeval	time;
 	double			starttime;
 	int				finished;
+	int				*allfinished;
 }				t_data;
 
 int		ft_atoi(const char *nptr);

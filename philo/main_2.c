@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:24:25 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/20 09:40:14 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:59:18 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ int	checkforallprinted(t_data **d)
 		i++;
 	}
 	if (finished == d[0]->nump)
+	{
+		*d[0]->allfinished = 1;
 		return (1);
+	}
+
 	else
 		return (0);
 }
@@ -42,7 +46,7 @@ int	checkfunct(t_data **d)
 		i = 0;
 		while (i < d[0]->nump)
 		{
-			pthread_mutex_lock(d[i]->datam);//deadlock gone when rm this
+			pthread_mutex_lock(d[i]->datam);
 			if (d[i]->lasteat + d[i]->ttodie <= (long) millsect(d[i])
 				&& d[i]->timeseaten < d[i]->numberofndeats)
 			{
