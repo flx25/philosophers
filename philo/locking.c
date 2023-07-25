@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 09:14:16 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/20 10:46:47 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/25 10:47:15 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int	eatandsleep(t_data *d)
 	if (d->timeseaten >= d->numberofndeats && d->numberofndeats)
 		d->finished = 1;
 	pthread_mutex_unlock(d->datam);
-	if (*d->allfinished)
-		return (1);
 	pthread_mutex_lock(d->datam);
+	if (*d->allfinished)
+		return (pthread_mutex_unlock(d->datam), 1);
 	// if (d->timeseaten >= d->numberofndeats && d->numberofndeats)
 	// 	return (pthread_mutex_unlock(d->datam), 1);
 	mt_printf("%ld %i is sleeping\n", d);

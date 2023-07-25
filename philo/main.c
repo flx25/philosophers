@@ -6,13 +6,13 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/20 11:01:56 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/25 10:42:51 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// maybe use usleeps with the time needed for eating instead or addition
+// with no limit all exept 1 stop now
 // ./philo 4 310 200 100
 // ./philo 5 800 200 200
 // ./philo 5 800 200 200 7 one dies for some reason, data race (+ leaks)
@@ -51,10 +51,10 @@ void	*philo(void *arg)
 	{
 		if (grabforks(d) == 0)
 			eatandsleep(d);
-		// pthread_mutex_lock(d->datam);
+		pthread_mutex_lock(d->datam);
 		if (*d->allfinished) // data race here at access, mutex fixes it but changes stop timing with limit
 			return (NULL);
-		// pthread_mutex_unlock(d->datam);
+		pthread_mutex_unlock(d->datam);
 	}
 	return (NULL);
 	// pthread_mutex_lock(d->datam);

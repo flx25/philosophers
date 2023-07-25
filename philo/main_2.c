@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:24:25 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/20 10:59:18 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/25 10:26:54 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	checkfunct(t_data **d)
 		{
 			pthread_mutex_lock(d[i]->datam);
 			if (d[i]->lasteat + d[i]->ttodie <= (long) millsect(d[i])
-				&& d[i]->timeseaten < d[i]->numberofndeats)
+				&& (d[i]->timeseaten < d[i]->numberofndeats || !d[i]->numberofndeats))
 			{
 				*d[i]->onedied = 1;
 				oneddied = 1;
