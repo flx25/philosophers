@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:58:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/18 10:05:50 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:44:23 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	initforks(t_data **d)
 	pthread_mutex_t	*out;
 	pthread_mutex_t	*datam;
 	pthread_mutex_t	*printfm;
-
 
 	out = malloc(d[0]->nump * sizeof(pthread_mutex_t));
 	datam = malloc(sizeof(pthread_mutex_t));

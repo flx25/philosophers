@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:24:25 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/31 11:19:29 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:44:07 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	checkforallprinted(t_data **d)
 		*d[0]->allfinished = 1;
 		return (1);
 	}
-
 	else
 		return (0);
 }
@@ -48,12 +47,12 @@ int	checkfunct(t_data **d)
 		{
 			pthread_mutex_lock(d[i]->datam);
 			if (d[i]->lasteat + d[i]->ttodie <= (long) millsect(d[i])
-				&& (d[i]->timeseaten < d[i]->numberofndeats || !d[i]->numberofndeats))
+				&& (d[i]->timeseaten < d[i]->numberofndeats
+					|| !d[i]->numberofndeats))
 			{
 				*d[i]->onedied = 1;
 				oneddied = 1;
-				mt_printf("%ld %i died\n", d[i]);
-				return (0);
+				return (mt_printf("%ld %i died\n", d[i]), 0);
 			}
 			if (checkforallprinted(d))
 				return (pthread_mutex_unlock(d[i]->datam), 0);
@@ -77,13 +76,11 @@ void	freefunct(t_data **d)
 	free(d[0]->datam);
 	pthread_mutex_destroy(d[0]->printfm);
 	free(d[0]->printfm);
-	//destroy all mutexes
 	i = 0;
 	nump = d[0]->nump;
 	while (i < nump)
 		free(d[i++]);
-	free(d); //free every node seperate
-	//free all forks free(d[0]->forks) and destroy all mutexes
+	free(d);
 }
 
 void	detachall(t_data **d)

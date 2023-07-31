@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 09:52:17 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/18 10:53:25 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:44:48 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	mt_printf(char *str, t_data *d)
 	onedied = *d->onedied;
 	if (!*d->lastprinted && onedied && !ft_strcmp(str, "%ld %i died\n"))
 	{
-
 		out = printf(str, (long)millsect(d), d->philonum +1);
 		*d->lastprinted = 1;
 		pthread_mutex_unlock(d->printfm);
@@ -34,7 +33,5 @@ int	mt_printf(char *str, t_data *d)
 	}
 	out = printf(str, (long)millsect(d), d->philonum +1);
 	pthread_mutex_unlock(d->printfm);
-
-	// out = printf(str, (long)millsect(d), d->philonum +1); // testing only
 	return (out);
 }

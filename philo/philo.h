@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:49:03 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/31 13:39:53 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:35:16 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ int		ft_strcmp(char *s1, char *s2);
 void	freefunct(t_data **d);
 void	detachall(t_data **d);
 void	*ft_memset(void *s, int c, size_t n);
+void	eatandsleep_middle(t_data *d);
 
 #endif
