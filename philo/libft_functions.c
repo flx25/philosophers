@@ -6,11 +6,23 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:11:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/06/13 11:28:00 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:39:42 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	unsigned char	*p;
+
+	p = s;
+	while (n--)
+	{
+		*p++ = (unsigned char) c;
+	}
+	return (s);
+}
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -33,10 +45,10 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 int	ft_strcmp(char *s1, char *s2)
 {
-    int	i;
+	int	i;
 
-    i = 0;
-    while (s1[i] && s2[i] && s1[i] == s2[i])
-        ++i;
-    return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		++i;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
