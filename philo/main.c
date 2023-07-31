@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/31 14:07:56 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:48:31 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // ./philo 4 310 200 100
 // ./philo 5 800 200 200
 // ./philo 5 800 200 200 7
-// maybe need to free mainstruct, check for leaks
+// does the dying time match with lasteat? does it start counting at the right time?
 
 void	*philo(void *arg)
 {

@@ -6,14 +6,12 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 09:52:17 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/31 14:44:48 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:46:39 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// empty output when mutex is locked
-// make lastprinted variable
 int	mt_printf(char *str, t_data *d)
 {
 	int	out;
