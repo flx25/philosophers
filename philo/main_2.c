@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:24:25 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/31 10:36:31 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 10:59:59 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,16 @@ void	freefunct(t_data **d)
 		free(d[i++]);
 	free(d); //free every node seperate
 	//free all forks free(d[0]->forks) and destroy all mutexes
+}
+
+void	detachall(t_data **d)
+{
+	int	i;
+
+	i = 0;
+	while (i < d[0]->nump)
+	{
+		pthread_detach(d[i]->tid);
+		i++;
+	}
 }
