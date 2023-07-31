@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:24:25 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/31 10:59:59 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 11:19:29 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,8 @@ void	freefunct(t_data **d)
 
 	i = 0;
 	while (i < d[0]->nump)
-	{
-		pthread_mutex_destroy(d[i]->forks);
-		free(d[i++]->forks);
-	}
+		pthread_mutex_destroy(d[i++]->forks);
+	free(d[0]->forks);
 	pthread_mutex_destroy(d[0]->datam);
 	free(d[0]->datam);
 	pthread_mutex_destroy(d[0]->printfm);
