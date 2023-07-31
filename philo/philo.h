@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:49:03 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/20 10:37:18 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 10:06:19 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void	*ft_calloc(size_t nmemb, size_t size);
 int		checkfunct(t_data **d);
 int		mt_printf(char *str, t_data *d);
 int		ft_strcmp(char *s1, char *s2);
+void	freefunct(t_data **d);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:24:25 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/25 10:26:54 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 10:36:31 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,28 @@ int	checkfunct(t_data **d)
 		}
 	}
 	return (0);
+}
+
+void	freefunct(t_data **d)
+{
+	int	i;
+	int	nump;
+
+	i = 0;
+	while (i < d[0]->nump)
+	{
+		pthread_mutex_destroy(d[i]->forks);
+		free(d[i++]->forks);
+	}
+	pthread_mutex_destroy(d[0]->datam);
+	free(d[0]->datam);
+	pthread_mutex_destroy(d[0]->printfm);
+	free(d[0]->printfm);
+	//destroy all mutexes
+	i = 0;
+	nump = d[0]->nump;
+	while (i < nump)
+		free(d[i++]);
+	free(d); //free every node seperate
+	//free all forks free(d[0]->forks) and destroy all mutexes
 }

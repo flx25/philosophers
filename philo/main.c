@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/25 10:42:51 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/07/31 10:04:37 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int	main(int argc, char **argv)
 	assignforks(d);
 	createthreads(d);
 	checkfunct(d);
+	freefunct(d);
 	return (0); // still need to destroy mutexes and free, just temporary
 	ptjoinall(d);
 	//destroy all mutexes
