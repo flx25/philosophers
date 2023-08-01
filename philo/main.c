@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/07/31 14:48:31 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:43:40 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,19 @@
 // ./philo 4 310 200 100
 // ./philo 5 800 200 200
 // ./philo 5 800 200 200 7
-// does the dying time match with lasteat? does it start counting at the right time?
+// need to make them die directly after last eat when limitation is there
+
+void	ptjoinall(t_data **d)
+{
+	int	i;
+
+	i = 0;
+	while (i < d[0]->nump && *d[0]->onedied == 0)
+	{
+		pthread_join(d[i]->tid, NULL);
+		i++;
+	}
+}
 
 void	*philo(void *arg)
 {
@@ -97,6 +109,7 @@ int	main(int argc, char **argv)
 	createthreads(d);
 	checkfunct(d);
 	detachall(d);
+	ptjoinall(d);
 	freefunct(d);
 	return (0);
 }
