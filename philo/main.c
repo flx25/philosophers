@@ -6,7 +6,7 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/08/01 09:43:40 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:50:18 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	*philo(void *arg)
 		if (grabforks(d) == 0)
 			eatandsleep(d);
 		pthread_mutex_lock(d->datam);
-		if (*d->allfinished)
-			return (NULL);
+		if (d->timeseaten >= d->numberofndeats && d->numberofndeats)
+			return (pthread_mutex_unlock(d->datam), NULL);
 		pthread_mutex_unlock(d->datam);
 	}
 	return (NULL);
@@ -108,8 +108,8 @@ int	main(int argc, char **argv)
 	assignforks(d);
 	createthreads(d);
 	checkfunct(d);
-	detachall(d);
 	ptjoinall(d);
+	detachall(d);
 	freefunct(d);
 	return (0);
 }
