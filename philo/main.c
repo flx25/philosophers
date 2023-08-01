@@ -6,16 +6,17 @@
 /*   By: fvon-nag <fvon-nag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:07:19 by fvon-nag          #+#    #+#             */
-/*   Updated: 2023/08/01 13:50:18 by fvon-nag         ###   ########.fr       */
+/*   Updated: 2023/08/01 14:44:32 by fvon-nag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// ./philo 4 310 200 100
+// ./philo 1 800 200 200
 // ./philo 5 800 200 200
 // ./philo 5 800 200 200 7
-// need to make them die directly after last eat when limitation is there
+// ./philo 4 410 200 200
+// ./philo 4 310 200 100
 
 void	ptjoinall(t_data **d)
 {
